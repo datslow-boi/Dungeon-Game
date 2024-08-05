@@ -1,0 +1,14 @@
+{
+    "1" : {
+        "type" : "equipment",
+        "path" : "art\\items\\claymore_2.png",
+        "name" : "Sword"
+    },
+    
+    "2" : {
+        "type" : "consume",
+        "path" : "art\\items\\ruby_new.png",
+        "name" : "Heal Potion",
+        "heal" : 10
+    }
+}

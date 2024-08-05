@@ -8,13 +8,18 @@ class NPC_Manager:
         self.npcs = npcs
         self.npc_list = []
 
+        data = load_json("data/npcs.json")
+
         # populate world with NPC's
-        for row in range(len(npcs)):
-            for column in range(len(npcs)):
-                if npcs[row][column] == 1:
-                    self.npc_list.append(NPC(self.game, "art\characters\deep_troll.png", "Troll", 10, 6, 2))
-                    self.npc_list[-1].x = column
-                    self.npc_list[-1].y = row
+        for i, row in enumerate(self.npcs):
+            for t, column in enumerate(self.npcs):
+                if str(self.npcs[i][t]) in data:
+                    npc = str(self.npcs[i][t])
+
+                    self.npc_list.append(NPC(self.game, data[npc]["path"], 
+                                             data[npc]["name"], data[npc]["hp"], 
+                                             data[npc]["atk"], data[npc]["deff"], x=t, y=i))
+    
                     #print(f"{self.npc_list[-1].name}: ({self.npc_list[-1].x}, {self.npc_list[-1].y})")
         #print(self.npc_list)
 

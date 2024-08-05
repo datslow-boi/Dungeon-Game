@@ -1,0 +1,20 @@
+{
+    "0" :
+    {
+        "name" : "floor",
+        "path" : "art\\enviroment\\pebble_brown_2_new.png",
+        "solid" : false
+    },
+    "1" :
+    {
+        "name" : "wall",
+        "path" : "art\\enviroment\\catacombs_0.png",
+        "solid" : true
+    },
+    "2" :
+    {
+        "name" : "door",
+        "path" : "art\\enviroment\\open_door.png",
+        "solid" : false
+    }
+}

@@ -1,5 +1,3 @@
-import json
-
 import pygame
 
 from settings import *
@@ -17,10 +15,13 @@ class Items:
         self.image = load_image(path)
 
 class Consume(Items):
-     def __init__(self, path, name, in_world=False, x=0, y=0, heal=0) -> None:
+    def __init__(self, path, name, in_world=False, x=0, y=0, heal=0) -> None:
         super().__init__(path, name, in_world, x, y)
         
         self.heal = heal
+
+    def activate(self, target):
+        target.hp += self.heal
           
 
 
@@ -32,7 +33,7 @@ class Item_Manager:
             self.tile_size = TILE_SIZE
             self.item_list = []
 
-            data = load_json("items.json")
+            data = load_json("data/items.json")
 
             for i, row in enumerate(self.items):
                 for t, column in enumerate(self.items):

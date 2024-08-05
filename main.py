@@ -9,6 +9,7 @@ from items import *
 from states import *
 from combat import *
 from inventory import *
+from helper import *
 
 class Game:
     def __init__(self) -> None:
@@ -28,16 +29,21 @@ class Game:
         self.camera_offset_x = 0 
         self.camera_offset_y = 0
 
+        self.world_data = load_json("data/world_data.json")
+        self.world_map = self.world_data["test_map"]
+
         self.new_game()
 
         
     def new_game(self):
-        self.world = World(self, map)
+
+        self.world = World(self, self.world_map["map"])
+        print(self.world_map["map"])
         
         # World entities
         self.player = Player(self, "Ben", 20, 5, 3, 1, 1)
-        self.npc_manager = NPC_Manager(self, npcs)
-        self.item_manager = Item_Manager(self, items)
+        self.npc_manager = NPC_Manager(self, self.world_map["npcs"])
+        self.item_manager = Item_Manager(self, self.world_map["items"])
         self.combat_manager = Combat_Manager(self)
         self.inventory_manager = Inventory_manager(self)
 

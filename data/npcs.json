@@ -1,0 +1,10 @@
+{
+    "1":
+    {
+        "name" : "Troll",
+        "path" : "art\\characters\\deep_troll.png",
+        "hp"   : 10,
+        "atk"  : 6,
+        "deff" : 2
+    }
+}

@@ -36,8 +36,11 @@ class NPC:
             if self.x == self.game.player.x:
                 if self.y == self.game.player.y:
                     self.game.game_state_manager.set_state("combat")
-                    for i in range(random.randrange(1,4)):
-                        self.game.combat_manager.add_npcs(self)
+                    # Randomly cloan itself into the combat list
+                    # for i in range(random.randrange(1,4)):
+                    #     self.game.combat_manager.add_npcs(self)
+                    
+                    self.game.combat_manager.add_npcs(self) # Add npc to the combat list
                 
 
             #dx, dy = self.wander()
