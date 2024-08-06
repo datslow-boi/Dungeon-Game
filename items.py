@@ -55,6 +55,11 @@ class Item_Manager:
                             if "heal" in data[item]:
                                 self.item_list[-1].heal = data[item]["heal"]
                                 print("heal")
+
+        def add_item(self, item, x, y):
+            self.item_list.append(item)
+            item.x = x
+            item.y = y
                         
 
         def update(self):
@@ -63,9 +68,8 @@ class Item_Manager:
                 if self.game.player.x == self.item_list[item].x:
                         if self.game.player.y == self.item_list[item].y:
                             self.game.inventory_manager.add_item(self.item_list[item])
-                            print(f"you picked up {self.item_list[item].name}")
+                            self.game.textbox.update_text(f"you picked up {self.item_list[item].name}")
                             self.item_list.pop(item)
-                            print(self.game.player.inventory)
                             break
 
         def draw(self):

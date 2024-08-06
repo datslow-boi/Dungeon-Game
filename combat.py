@@ -51,8 +51,10 @@ class Combat_Manager:
                     if self.selected_element == 1:
                         self.game.game_state_manager.set_state("inventory")
                     if self.selected_element == 2:
+                        self.game.textbox.update_text(f"You fled the {self.npcs[0].name}")
                         self.npcs = []
                         self.game.game_state_manager.set_state("world")
+                        
     
     def update(self):
         # Check if enemies are dead
@@ -67,6 +69,7 @@ class Combat_Manager:
         if len(self.npcs) == 0:
             self.npcs = []
             self.game.game_state_manager.set_state("world")
+            self.game.textbox.update_text("You Survived")
 
         if not self.turn:
             for npc in range(len(self.npcs)):
@@ -99,7 +102,7 @@ class Combat_Manager:
         
         # Interface Box
         buffer = 4
-        box_y = 100
+        box_y = 150
         menu_width = 30
         pygame.draw.rect(self.game.display, "white", (buffer+menu_width+buffer, box_y, SCALE_WIDTH-(buffer*2)-menu_width-buffer, 
                                                       (SCALE_HEIGHT-box_y)-buffer), width=1)

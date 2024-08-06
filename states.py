@@ -46,6 +46,7 @@ class World_State(State):
         self.game.item_manager.draw()
         self.game.npc_manager.draw()
         self.game.player.draw()
+        self.game.textbox.draw()
 
 # States
 class Combat_State(State):

@@ -1,4 +1,10 @@
 {
+    "default" : 
+    {
+        "name" : "default",
+        "path" : "art\\enviroment\\travel_exclusion_center_old.png",
+        "solid" : false
+    },
     "0" :
     {
         "name" : "floor",

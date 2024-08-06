@@ -25,13 +25,18 @@ class World:
         # Populate dictionary with tiles and coords
         data = load_json("data/tiles.json")
 
-        for row in range(len(self.map)):
-            for column in range(len(self.map)):
-                if str(self.map[row][column]) in data:
-                    tile = str(self.map[row][column])
+    
+
+
+        for row in range(self.map["height"]):
+            for column in range(self.map["width"]):
+                if str(self.map["map"][row][column]) in data:
+                    tile = str(self.map["map"][row][column])
                     self.world_data[(column, row)] = Tile(data[tile]["name"], data[tile]["path"], data[tile]["solid"])
-
-
+                else:
+                    # if the tile doesn't exist add an error tile
+                    self.world_data[(column, row)] = Tile(data["default"]["name"], data["default"]["path"], data["default"]["solid"])
+        print(self.map["width"], self.map["height"])
         
         
     def draw(self):

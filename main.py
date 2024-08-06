@@ -10,6 +10,7 @@ from states import *
 from combat import *
 from inventory import *
 from helper import *
+from gui import *
 
 class Game:
     def __init__(self) -> None:
@@ -18,6 +19,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.display = pygame.Surface((RES_SCALE))
+        self.gui = pygame.Surface(RES_SCALE)
         
         # Init fonts
         self.font_big = pygame.font.SysFont("Arial", 15)
@@ -37,15 +39,16 @@ class Game:
         
     def new_game(self):
 
-        self.world = World(self, self.world_map["map"])
+        self.world = World(self, self.world_map)
         print(self.world_map["map"])
         
         # World entities
-        self.player = Player(self, "Ben", 20, 5, 3, 1, 1)
+        self.player = Player(self, "art\characters\human_male.png", "Ben", 20, 5, 3, 1, 1)
         self.npc_manager = NPC_Manager(self, self.world_map["npcs"])
         self.item_manager = Item_Manager(self, self.world_map["items"])
         self.combat_manager = Combat_Manager(self)
         self.inventory_manager = Inventory_manager(self)
+        self.textbox = Textbox(self)
 
         # Game States
         self.game_state_manager = Game_State_Manager(self, "world")
@@ -76,8 +79,10 @@ class Game:
     def draw(self):
         self.states[self.game_state_manager.get_state()].draw() # Draw the state we're in
 
-        surf = pygame.transform.scale(self.display, RES) # scale the sceen
+        surf = pygame.transform.scale(self.display, (RES)) # scale the sceen
+        
         self.screen.blit(surf, (0, 0))
+        
 
     def check_events(self):
         for event in pygame.event.get():

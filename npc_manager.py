@@ -1,6 +1,6 @@
 
 from settings import *
-from npc import *
+from charecter import *
 
 class NPC_Manager:
     def __init__(self, game, npcs) -> None:

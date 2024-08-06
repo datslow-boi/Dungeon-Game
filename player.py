@@ -1,22 +1,17 @@
 import pygame
 
+from charecter import *
 from settings import *
 from helper import *
 
 
-class Player:
-    def __init__(self, game, name, hp, atk, deff, x, y) -> None:
-        self.game = game
-        self.name = name
-        self.hp = hp
-        self.atk = atk
-        self.deff = deff
-        self.x = x
-        self.y = y
+class Player(Charecter):
+    def __init__(self, game, path, name, hp, atk, deff, x, y) -> None:
+        super().__init__(game, path, name, hp, atk, deff, x, y)
         self.draw_x = x
         self.draw_y = y
         self.tile_size = TILE_SIZE
-        self.image = load_image("art\characters\human_male.png")
+        self.image = load_image(path)
 
         self.inventory = []
 
