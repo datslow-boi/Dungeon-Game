@@ -2,7 +2,9 @@
     "1" : {
         "type" : "equipment",
         "path" : "art\\items\\claymore_2.png",
-        "name" : "Sword"
+        "name" : "Sword",
+        "atk"  : 3,
+        "weapon": true
     },
     
     "2" : {
@@ -10,5 +12,26 @@
         "path" : "art\\items\\ruby_new.png",
         "name" : "Heal Potion",
         "heal" : 10
+    },
+    "3" : {
+        "type" : "equipment",
+        "path" : "art\\items\\chainmail_3.png",
+        "name" : "armor",
+        "deff" : 3,
+        "chest": true
+    },
+    "4" : {
+        "type" : "equipment",
+        "path" : "art\\items\\leg_armor_3.png",
+        "name" : "pants",
+        "deff" : 3,
+        "legs": true
+    },
+    "5": {
+        "type" : "equipment",
+        "path" : "art\\items\\hood_gray.png",
+        "name" : "healmet",
+        "deff" : 3,
+        "head": true
     }
 }

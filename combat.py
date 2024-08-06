@@ -1,4 +1,5 @@
 import time
+import random
 
 import pygame
 
@@ -22,10 +23,12 @@ class Combat_Manager:
     def add_npcs(self, npc):
         self.npcs.append(npc)
 
-    def attack(self, target, atk):
-        damage = (atk - target.deff)
+    def attack(self, attacker, target, atk):
+        damage = random.randrange(-MAGIC_NUM, MAGIC_NUM)+(atk - target.deff)
         if damage <= 0: damage = 0
         target.hp -= damage
+
+        self.box_text = f"{attacker.name}: attacks for {damage} damage!"
 
     def check_events(self, event):
         # Player input
@@ -46,7 +49,7 @@ class Combat_Manager:
                 # Activate Selected option
                 if event.key == pygame.K_e:
                     if self.selected_element == 0:
-                        self.attack(self.npcs[0], self.game.player.atk)
+                        self.attack(self.game.player, self.npcs[0], self.game.player.atk)
                         self.turn = False
                     if self.selected_element == 1:
                         self.game.game_state_manager.set_state("inventory")
@@ -73,7 +76,7 @@ class Combat_Manager:
 
         if not self.turn:
             for npc in range(len(self.npcs)):
-                self.attack(self.game.player, self.npcs[npc].atk)
+                self.attack(self.npcs[npc], self.game.player, self.npcs[npc].atk)
             self.turn = True
 
         if self.game.player.hp <= 0:
@@ -125,7 +128,7 @@ class Combat_Manager:
         # Player stat box
         pygame.draw.rect(self.game.display, "white", (SCALE_WIDTH-TILE_SIZE-4, box_y-TILE_SIZE*2-7, TILE_SIZE, TILE_SIZE+35), width=1)
         # Draw Player
-        self.game.display.blit(self.game.player.image, (SCALE_WIDTH-TILE_SIZE, box_y-TILE_SIZE*2))
+        self.game.player.draw_player(SCALE_WIDTH-TILE_SIZE, box_y-TILE_SIZE*2)
         # Player Stats
         draw_text(self.game.display, self.game.player.name, # Name
                   self.font, "white", SCALE_WIDTH-TILE_SIZE, box_y-TILE_SIZE*2-6)

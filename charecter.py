@@ -48,8 +48,10 @@ class NPC(Charecter):
                     self.game.combat_manager.add_npcs(self) # Add npc to the combat list
                 
 
-            #dx, dy = self.wander()
-            dx, dy = self.follow(self.game.player)
+            #dx, dy = self.wander()     #wander
+            #dx, dy = self.follow(self.game.player) #chase player
+
+            dx, dy = self.idle()    #chase player
 
             if self.get_wall(dx, dy).solid == False:
                 self.x = dx
@@ -78,6 +80,9 @@ class NPC(Charecter):
 
         return (dx, dy)
         #print(f"{dx},{dy}")
+
+    def idle(self):
+        return self.x, self.y
 
     def get_wall(self, x, y):
         return self.game.world.world_data[(x,y)]
