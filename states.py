@@ -35,8 +35,13 @@ class World_State(State):
     def update(self):
         if self.game.step:
             #self.troll.update()
+            self.game.trigger_manager.update()
             self.game.npc_manager.update()
             self.game.item_manager.update()
+            self.game.textbox.update()
+            self.game.world.update()
+            self.game.exits.update()
+            
             self.game.step = False
 
     def draw(self):
@@ -47,6 +52,7 @@ class World_State(State):
         self.game.npc_manager.draw()
         self.game.player.draw()
         self.game.textbox.draw()
+        self.game.trigger_manager.draw()
 
 # States
 class Combat_State(State):

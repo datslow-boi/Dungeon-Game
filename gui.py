@@ -19,11 +19,18 @@ class Textbox:
         self.text = ""
         self.scroll = 0
 
+        self.triggers = self.game.trigger_manager.trigger_list
+        #print(self.triggers)
+
     def update_text(self, text):
         self.text = text
 
     def update(self):
-        pass
+        if find_trigger(self.triggers, "1"):
+            self.update_text("it worked")
+        elif find_trigger(self.triggers, "2"):
+            self.update_text("2 worked")
+            
 
     def draw(self):
         pygame.draw.rect(self.surface, "black", (self.x, self.y, self.width, self.height))

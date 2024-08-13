@@ -1,4 +1,5 @@
 import sys
+
 import pygame
 
 from settings import *
@@ -11,6 +12,8 @@ from combat import *
 from inventory import *
 from helper import *
 from gui import *
+from trigger import *
+from exits import *
 
 class Game:
     def __init__(self) -> None:
@@ -40,7 +43,7 @@ class Game:
     def new_game(self):
 
         self.world = World(self, self.world_map)
-        print(self.world_map["map"])
+        #print(self.world_map["map"])
         
         # World entities
         self.player = Player(self, "art\characters\human_male.png", "Ben", 20, 5, 3, 1, 1)
@@ -48,7 +51,9 @@ class Game:
         self.item_manager = Item_Manager(self, self.world_map["items"])
         self.combat_manager = Combat_Manager(self)
         self.inventory_manager = Inventory_manager(self)
+        self.trigger_manager = Trigger_Manager(self, self.world_map["triggers"])
         self.textbox = Textbox(self)
+        self.exits = Exits(self)
 
         # Game States
         self.game_state_manager = Game_State_Manager(self, "world")
@@ -82,7 +87,7 @@ class Game:
         surf = pygame.transform.scale(self.display, (RES)) # scale the sceen
         
         self.screen.blit(surf, (0, 0))
-        
+
 
     def check_events(self):
         for event in pygame.event.get():

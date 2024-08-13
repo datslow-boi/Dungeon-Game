@@ -74,11 +74,20 @@ class Item_Manager:
             self.tile_size = TILE_SIZE
             self.item_list = []
 
+            self.map = game.world_map
+            
+            self.load_items(self.map, self.items)
+
+        def load_items(self, map, items):
+            self.items = items
+            self.map = map
+            print(self.map["name"])
+            self.item_list = []
             data = load_json("data/items.json")
 
             # loads items in world data to item list
-            for row in range(len(self.items)):
-                for column in range(len(self.items)):
+            for row in range(self.map["height"]):
+                for column in range(self.map["width"]):
                     if str(self.items[row][column]) in data:
                         item = str(self.items[row][column])
                         

@@ -17,3 +17,11 @@ def load_image(path):
 def load_json(path):
     with open(path, "r") as file:
         return json.load(file)
+    
+def find_trigger(list, trigger, destroy=False):
+    # if destroy:
+    #     del list[trigger]
+    #     return True
+    if trigger in list and list[trigger].is_active == True:
+        return True
+    
