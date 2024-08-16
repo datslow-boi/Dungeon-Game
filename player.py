@@ -22,25 +22,32 @@ class Player(Charecter):
     def check_events(self, event):
         # Player input
         if event.type == pygame.KEYDOWN:
-            self.game.step = True
             # Movement
             if event.key == pygame.K_d and self.get_wall(self.x+1, self.y).solid == False:
+                    self.game.step = True
                     self.game.camera_offset_x -= 1
                     self.x += 1
                 
             if event.key == pygame.K_a and self.get_wall(self.x-1, self.y).solid == False:
+                self.game.step = True
                 self.x -= 1
                 self.game.camera_offset_x += 1
             if event.key == pygame.K_w and self.get_wall(self.x, self.y-1).solid == False:
+                self.game.step = True
                 self.y -= 1
                 self.game.camera_offset_y += 1
             if event.key == pygame.K_s and self.get_wall(self.x, self.y+1).solid == False:
+                self.game.step = True
                 self.y += 1
                 self.game.camera_offset_y -= 1
 
             # Inventory
             if event.key == pygame.K_i:
                 self.game.game_state_manager.set_state("inventory")
+
+            # Step
+            if event.key == pygame.K_SPACE:
+                self.game.step = True
 
     def get_wall(self, x, y):
         return self.game.world.world_data[(x,y)]

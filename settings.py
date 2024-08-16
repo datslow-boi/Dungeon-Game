@@ -11,4 +11,4 @@ MAGIC_NUM = 3
 
 VISABLE_TRIGGER = True
 
-SHADOW = True
+SHADOW = False

@@ -35,7 +35,8 @@ class Game:
         self.camera_offset_y = 0
 
         self.world_data = load_json("data/world_data.json")
-        self.world_map = self.world_data["test_map"]
+        self.map_key = "test_map"
+        self.world_map = self.world_data[self.map_key]
 
         self.new_game()
 
@@ -43,10 +44,11 @@ class Game:
     def new_game(self):
 
         self.world = World(self, self.world_map)
+        self.temp_world = {}
         #print(self.world_map["map"])
         
         # World entities
-        self.player = Player(self, "art\characters\human_male.png", "Ben", 20, 5, 3, 1, 1)
+        self.player = Player(self, "art\characters\human_female.png", "Ben", 20, 5, 3, 1, 1)
         self.npc_manager = NPC_Manager(self, self.world_map["npcs"])
         self.item_manager = Item_Manager(self, self.world_map["items"])
         self.combat_manager = Combat_Manager(self)

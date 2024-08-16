@@ -81,7 +81,7 @@ class Item_Manager:
         def load_items(self, map, items):
             self.items = items
             self.map = map
-            print(self.map["name"])
+            #print(self.map["name"])
             self.item_list = []
             data = load_json("data/items.json")
 

@@ -30,7 +30,7 @@ class World:
 
     def build_world(self):
         # Populate dictionary with tiles and coords
-        print("build world")
+        #print("build world")
         data = load_json("data/tiles.json")
 
         for row in range(self.map["height"]):

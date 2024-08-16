@@ -43,12 +43,14 @@ class Trigger_Manager:
                          self.trigger_list[trigger].destroy = data[trigger]["destroy"]
 
                   
-        print("load trigger", self.trigger_list)
+        #print("load trigger", self.trigger_list)
         #print(self.trigger_list)
         #print([f"{i.name}: x={i.x}, y={i.y}" for i in self.trigger_list]) 
 
                     
-
+    def reset(self):
+        for trigger in self.trigger_list:
+            self.trigger_list[trigger].active = False
 
 
     def update(self):

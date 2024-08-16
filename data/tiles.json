@@ -22,5 +22,17 @@
         "name" : "door",
         "path" : "art\\enviroment\\open_door.png",
         "solid" : false
+    },
+    "3" :
+    {
+        "name" : "stair up",
+        "path" : "art\\enviroment\\stone_stairs_up.png",
+        "solid" : false
+    },
+    "4" :
+    {
+        "name" : "stair down",
+        "path" : "art\\enviroment\\stone_stairs_down.png",
+        "solid" : false
     }
 }
