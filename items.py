@@ -23,6 +23,14 @@ class Consume(Items):
     def activate(self, target):
         target.hp += self.heal
 
+class Key(Items):
+    def __init__(self, path, name, id, in_world=False, x=0, y=0) -> None:
+        super().__init__(path, name, in_world, x, y)
+        
+        self.id = id
+
+
+
 class Equipment(Items):
     def __init__(self, path, name, in_world=False, x=0, y=0, atk=0, deff=0, 
                  chest=False, legs=False, head=False, weapon=False) -> None:
@@ -97,6 +105,9 @@ class Item_Manager:
                         elif data[item]["type"] == "consume":
                             self.load_consume(data, item, row, column)
 
+                        elif data[item]["type"] == "key":
+                            self.load_key(data, item, row, column)
+
                             
         def load_equipment(self, data, item, row, column):
             # Loads in speciface items from file to their position on the map  
@@ -127,6 +138,11 @@ class Item_Manager:
             if "heal" in data[item]:
                 self.item_list[-1].heal = data[item]["heal"]
                 print("heal")
+
+        def load_key(self, data, item, row, column):
+            print(f"key: {data[item]["name"]}")
+            self.item_list.append(Key(data[item]["path"], 
+                                        data[item]["name"], data[item]["id"], in_world=True, x=column, y=row))
 
                         
                         

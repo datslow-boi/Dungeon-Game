@@ -33,5 +33,17 @@
         "name" : "healmet",
         "deff" : 3,
         "head": true
+    },
+    "6" : {
+        "type" : "key",
+        "path" : "art\\items\\key.png",
+        "name" : "Key",
+        "id"   : 1
+    },
+    "7" : {
+        "type" : "key",
+        "path" : "art\\items\\key.png",
+        "name" : "Special Key",
+        "id"   : 2
     }
 }

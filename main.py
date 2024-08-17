@@ -25,6 +25,7 @@ class Game:
         self.gui = pygame.Surface(RES_SCALE)
         
         # Init fonts
+        self.font_title = pygame.font.SysFont("Arial", 40)
         self.font_big = pygame.font.SysFont("Arial", 15)
         self.font_small = pygame.font.SysFont("Arial", 8)
 
@@ -58,16 +59,20 @@ class Game:
         self.exits = Exits(self)
 
         # Game States
-        self.game_state_manager = Game_State_Manager(self, "world")
+        self.game_state_manager = Game_State_Manager(self, "title")
         self.world_state = World_State(self.screen, self.game_state_manager)
         self.combat_state = Combat_State(self.screen, self.game_state_manager)
         self.dead_state = Dead_State(self.screen, self.game_state_manager)
         self.inventory_state = Inventory_State(self.screen, self.game_state_manager)
+        self.title_state = Title_State(self.screen, self.game_state_manager)
+        self.win_state = Win_State(self.screen, self.game_state_manager)
 
-        self.states = {"world": self.world_state, 
-                       "combat": self.combat_state, 
-                       "dead" : self.dead_state,
-                       "inventory" : self.inventory_state}
+        self.states = {"world"      : self.world_state, 
+                       "combat"     : self.combat_state, 
+                       "dead"       : self.dead_state,
+                       "inventory"  : self.inventory_state,
+                       "title"      : self.title_state,
+                       "win"        : self.win_state}
 
         #center camera
         _ox, _oy = self.player.get_xy()

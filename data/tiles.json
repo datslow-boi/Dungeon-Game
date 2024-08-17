@@ -21,7 +21,9 @@
     {
         "name" : "door",
         "path" : "art\\enviroment\\open_door.png",
-        "solid" : false
+        "closed_path" : "art\\enviroment\\closed_door.png",
+        "solid" : false,
+        "type" : "door"
     },
     "3" :
     {
@@ -34,5 +36,24 @@
         "name" : "stair down",
         "path" : "art\\enviroment\\stone_stairs_down.png",
         "solid" : false
+    },
+    "5" :
+    {
+        "name" : "locked door",
+        "path" : "art\\enviroment\\open_door.png",
+        "closed_path" : "art\\enviroment\\sealed_door.png",
+        "solid" : false,
+        "type" : "door",
+        "locked" : true
+    },
+    "6" :
+    {
+        "name" : "special locked door",
+        "path" : "art\\enviroment\\open_door.png",
+        "closed_path" : "art\\enviroment\\sealed_door.png",
+        "solid" : false,
+        "type" : "door",
+        "locked" : true,
+        "id" : 2
     }
 }

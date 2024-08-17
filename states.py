@@ -36,6 +36,7 @@ class World_State(State):
         if self.game.step:
             #self.troll.update()
             self.game.trigger_manager.update()
+            self.game.player.update()
             self.game.npc_manager.update()
             self.game.item_manager.update()
             self.game.textbox.update()
@@ -76,7 +77,10 @@ class Dead_State(State):
         self.game = game_state_manager.game
 
     def check_events(self, event):
-        pass
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                self.game.__init__()
+                self.game.game_state_manager.set_state("title")
 
     def update(self):
         pass
@@ -91,6 +95,9 @@ class Dead_State(State):
         draw_text(self.game.display, "You Died!", self.game.font_big, "red", SCALE_WIDTH/2,(SCALE_HEIGHT/2)-20)
         draw_text(self.game.display, "Death comes with clarity.  If only you understood sooner.", 
                   self.game.font_small, "white", (SCALE_WIDTH/2)-40,(SCALE_HEIGHT/2)+30)
+        
+        draw_text(self.game.display, "Space: to continue", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2)+50)
+        draw_text(self.game.display, "Esc: to quit", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2)+60)
 
 
 class Inventory_State(State):
@@ -106,3 +113,51 @@ class Inventory_State(State):
 
     def draw(self):
         self.game.inventory_manager.draw()
+
+
+class Title_State(State):
+    def __init__(self, display, game_state_manager) -> None:
+        super().__init__(display, game_state_manager)
+        self.game = game_state_manager.game
+
+    def check_events(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                self.game.game_state_manager.set_state("world")
+
+    def update(self):
+        pass
+
+    def draw(self):
+        self.game.display.fill("black")
+        draw_text(self.game.display, "Shadow Tower", self.game.font_title, "yellow", SCALE_WIDTH/2-120,(10))
+        draw_text(self.game.display, "Space: to play", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2))
+        draw_text(self.game.display, "Esc: to quit", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2+10))
+
+
+class Win_State(State):
+    def __init__(self, display, game_state_manager) -> None:
+        super().__init__(display, game_state_manager)
+        self.game = game_state_manager.game
+
+    def check_events(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                self.game.__init__()
+                self.game.game_state_manager.set_state("title")
+
+    def update(self):
+        pass
+
+    def draw(self):
+        self.game.display.fill("black")
+        draw_text(self.game.display, "Unlimited Power is Yours!", self.game.font_big, "red", SCALE_WIDTH/2-50,(10))
+
+        draw_text(self.game.display, "Thanks for playing!", self.game.font_small, "yellow", SCALE_WIDTH/2-10,30)
+
+        pygame.draw.circle(self.game.display, "white", ((SCALE_WIDTH/2)+TILE_SIZE/2,((SCALE_HEIGHT/2)-(TILE_SIZE*2))+TILE_SIZE/2), TILE_SIZE)
+        self.game.player.draw_player(SCALE_WIDTH/2,(SCALE_HEIGHT/2)-(TILE_SIZE*2))
+        
+
+        draw_text(self.game.display, "Space: to continue", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2))
+        draw_text(self.game.display, "Esc: to quit", self.game.font_small, "white", SCALE_WIDTH/2,(SCALE_HEIGHT/2+10))

@@ -13,5 +13,8 @@
     "4" : {
         "name" : "stairs 2",
         "destroy" : false
+    },
+    "100" : {
+        "name" : "win"
     }
 }

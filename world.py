@@ -11,6 +11,34 @@ class Tile:
         self.name = name
         self.image = load_image(path)
         self.solid = solid
+
+class Door(Tile):
+    def __init__(self, name, path, closed_path, locked=False, id=1, solid=False) -> None:
+        super().__init__(name, path, solid)
+        self.path = load_image(path)
+        self.closed_path = load_image(closed_path)
+        self.open = False
+        self.locked = locked
+        self.id = id
+
+        
+
+        if not self.open:
+            self.image = self.closed_path
+        else:
+            self.image = self.path
+            
+    def lock_door(self):
+        self.solid = self.locked
+    
+    def unlock_door(self):
+        self.solid = False
+        self.locked = False
+        self.open_door()
+
+    def open_door(self):
+        self.open = True
+        self.image = self.path
         
 
 class World:
@@ -35,21 +63,47 @@ class World:
 
         for row in range(self.map["height"]):
             for column in range(self.map["width"]):
-                if str(self.map["map"][row][column]) in data:
-                    tile = str(self.map["map"][row][column])
-                    self.world_data[(column, row)] = Tile(data[tile]["name"], data[tile]["path"], data[tile]["solid"])
+                tile = str(self.map["map"][row][column])
+                
+                if tile in data:
+                    if "type" in data[tile] and data[tile]["type"] == "door":
+                        self.load_door(data, tile, row, column)
+                    else:
+                        self.load_tile(data, tile, row, column)
+                
                 else:
                     # if the tile doesn't exist add an error tile
-                    self.world_data[(column, row)] = Tile(data["default"]["name"], data["default"]["path"], data["default"]["solid"])
-        #print(self.map["width"], self.map["height"])
+                    self.load_tile(data, "default", row, column)
+                    
     
     def reload_world(self, map):
         self.world_data = {}
         self.map = map
         self.build_world()
 
-    def update(self):
+
+    def load_tile(self, data, tile, row, column):
+        self.world_data[(column, row)] = Tile(data[tile]["name"], data[tile]["path"], data[tile]["solid"])
+
+    def load_door(self, data, tile, row, column):
+        self.world_data[(column, row)] = Door(data[tile]["name"], data[tile]["path"], data[tile]["closed_path"], data[tile]["solid"])
         
+        # optional options
+        if "locked" in data[tile]:
+            self.world_data[(column, row)].locked = data[tile]["locked"]
+            self.world_data[(column, row)].lock_door()
+        if "id" in data[tile]:
+            self.world_data[(column, row)].id = data[tile]["id"]
+
+    def update(self):
+        player_tile = self.world_data[((self.game.player.x, self.game.player.y))]
+        if isinstance(player_tile, Door):
+            if not player_tile.open:
+                if player_tile.locked:
+                    self.game.textbox.text = "door is locked"
+                    return
+                else:
+                    player_tile.open_door()
         #print(self.occlude_list)
         
         self.occlude_list = []
