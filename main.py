@@ -2,18 +2,17 @@ import sys
 
 import pygame
 
-from settings import *
+
 from world import *
-from player import *
-from npc_manager import *
-from items import *
+from charecter import *
 from states import *
-from combat import *
-from inventory import *
-from helper import *
 from gui import *
-from trigger import *
-from exits import *
+
+from helper import *
+from settings import *
+
+
+from experamental import *
 
 class Game:
     def __init__(self) -> None:
@@ -57,6 +56,7 @@ class Game:
         self.trigger_manager = Trigger_Manager(self, self.world_map["triggers"])
         self.textbox = Textbox(self)
         self.exits = Exits(self)
+        #self.generator = Generator(self, 30, 30, 69, backtracking=False)
 
         # Game States
         self.game_state_manager = Game_State_Manager(self, "title")
@@ -66,13 +66,15 @@ class Game:
         self.inventory_state = Inventory_State(self.screen, self.game_state_manager)
         self.title_state = Title_State(self.screen, self.game_state_manager)
         self.win_state = Win_State(self.screen, self.game_state_manager)
+        self.generator_state = Generator_State(self.screen, self.game_state_manager)
 
         self.states = {"world"      : self.world_state, 
                        "combat"     : self.combat_state, 
                        "dead"       : self.dead_state,
                        "inventory"  : self.inventory_state,
                        "title"      : self.title_state,
-                       "win"        : self.win_state}
+                       "win"        : self.win_state,
+                       "generator"  : self.generator_state}
 
         #center camera
         _ox, _oy = self.player.get_xy()

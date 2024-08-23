@@ -5,6 +5,16 @@
         "path" : "art\\characters\\deep_troll.png",
         "hp"   : 10,
         "atk"  : 6,
-        "deff" : 2
+        "deff" : 2,
+        "state" : "idle"
+    },
+    "2":
+    {
+        "name" : "Chaos Hero",
+        "path" : "art\\characters\\death_knight.png",
+        "hp"   : 20,
+        "atk"  : 10,
+        "deff" : 4,
+        "state" : "follow"
     }
 }
